@@ -162,6 +162,8 @@ internal static class ChatCommands
             new("MessageWait", "{duration}", Command.UsageLevels.Host, Command.UsageTimes.Always, MessageWaitCommand, true, false, [GetString("CommandArgs.MessageWait.Duration")]),
             new("Death", "[id]", Command.UsageLevels.Everyone, Command.UsageTimes.AfterDeath, DeathCommand, true, false, [GetString("CommandArgs.Death.Id")]),
             new("Say", "{message}", Command.UsageLevels.HostOrModerator, Command.UsageTimes.Always, SayCommand, true, false, [GetString("CommandArgs.Say.Message")]),
+            new("SecondKill", "{id}", Command.UsageLevels.Everyone, Command.UsageTimes.InGame, WerewolfCommand, true, true, [GetString("CommandArgs.SecondKill.Id")]),
+            new("ChangePlace", "{id1} {id2}", Command.UsageLevels.Everyone, Command.UsageTimes.InGame, WerewolfCommand, true, true, [GetString("CommandArgs.ChangePlace.Id1"), GetString("CommandArgs.ChangePlace.Id2")]),
             new("Vote", "{id}", Command.UsageLevels.Everyone, Command.UsageTimes.InMeeting, VoteCommand, true, true, [GetString("CommandArgs.Vote.Id")]),
             new("Ask", "{number1} {number2}", Command.UsageLevels.Everyone, Command.UsageTimes.InMeeting, AskCommand, true, true, [GetString("CommandArgs.Ask.Number1"), GetString("CommandArgs.Ask.Number2")]),
             new("Answer", "{number}", Command.UsageLevels.Everyone, Command.UsageTimes.InMeeting, AnswerCommand, true, false, [GetString("CommandArgs.Answer.Number")]),
@@ -3297,6 +3299,11 @@ internal static class ChatCommands
     {
         string versionText = Main.PlayerVersion.OrderBy(pair => pair.Key).Aggregate(string.Empty, (current, kvp) => current + $"{kvp.Key}: ({Main.AllPlayerNames[kvp.Key]}) {kvp.Value.forkId}/{kvp.Value.version}({kvp.Value.tag})\n");
         if (versionText != string.Empty && HudManager.InstanceExists) HudManager.Instance.Chat.AddChat(player, (player.FriendCode.GetDevUser().HasTag() ? "\n" : string.Empty) + versionText);
+    }
+
+    private static void WerewolfCommand(PlayerControl player, string text, string[] args)
+    {
+        if (!Werewolf.HandleCommand(player, text, args)) Utils.SendMessage(GetString("Werewolf.CommandUnavailable"), player.PlayerId);
     }
 
     private static void LTCommand(PlayerControl player, string text, string[] args)

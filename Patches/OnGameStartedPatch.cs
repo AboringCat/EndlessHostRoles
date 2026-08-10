@@ -316,6 +316,7 @@ internal static class ChangeRoleSettings
                 CustomHnS.Init();
                 Speedrun.Init();
                 DoomTag.Init();
+                Werewolf.Init();
             }
             catch (Exception e) { Utils.ThrowException(e); }
 
@@ -935,6 +936,9 @@ internal static class StartGameHostPatch
                     goto default;
                 case CustomGameMode.DoomTag:
                     DoomTag.OnGameStart();
+                    goto default;
+                case CustomGameMode.Werewolf:
+                    Werewolf.OnGameStart();
                     goto default;
                 default:
                     if (Options.IntegrateNaturalDisasters.GetBool()) goto case CustomGameMode.NaturalDisasters;
