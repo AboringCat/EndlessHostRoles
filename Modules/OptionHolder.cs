@@ -36,6 +36,7 @@ public enum CustomGameMode
     Mingle = 0x10,
     Snowdown = 0x11,
     DoomTag = 0x12,
+    Werewolf = 0x13,
     All = int.MaxValue
 }
 
@@ -100,7 +101,8 @@ public static class Options
         "Deathrace",
         "Mingle",
         "Snowdown",
-        "DoomTag"
+        "DoomTag",
+        "Werewolf"
     ];
 
     private static Dictionary<CustomRoles, int> roleCounts;
@@ -941,6 +943,7 @@ public static class Options
         15 => CustomGameMode.Mingle,
         16 => CustomGameMode.Snowdown,
         17 => CustomGameMode.DoomTag,
+        18 => CustomGameMode.Werewolf,
         _ => CustomGameMode.Standard
     };
 
@@ -1873,6 +1876,7 @@ public static class Options
         Snowdown.SetupCustomOption();
         // DoomTag
         DoomTag.SetupCustomOption();
+        Werewolf.SetupCustomOption();
 
         yield return null;
 

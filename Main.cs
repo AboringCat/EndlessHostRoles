@@ -149,7 +149,8 @@ public class Main : BasePlugin
         [CustomGameMode.CaptureTheFlag] = [],
         [CustomGameMode.NaturalDisasters] = [],
         [CustomGameMode.Snowdown] = [],
-        [CustomGameMode.DoomTag] = []
+        [CustomGameMode.DoomTag] = [],
+        [CustomGameMode.Werewolf] = []
     };
 
     public static Dictionary<CustomGameMode, Color> GameModeColors = [];
@@ -981,7 +982,8 @@ public class Main : BasePlugin
             [CustomGameMode.Deathrace] = Utils.GetRoleColor(CustomRoles.Racer),
             [CustomGameMode.Mingle] = Utils.GetRoleColor(CustomRoles.MinglePlayer),
             [CustomGameMode.Snowdown] = Utils.GetRoleColor(CustomRoles.SnowdownPlayer),
-            [CustomGameMode.DoomTag] = Utils.GetRoleColor(CustomRoles.Tagger)
+            [CustomGameMode.DoomTag] = Utils.GetRoleColor(CustomRoles.Tagger),
+            [CustomGameMode.Werewolf] = ColorUtility.TryParseHtmlString("#6f228b", out c) ? c : Color.white
         };
 
         IL2CPPChainloader.Instance.Finished += () =>

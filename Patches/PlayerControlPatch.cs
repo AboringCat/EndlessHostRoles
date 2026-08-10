@@ -264,6 +264,9 @@ internal static class CheckMurderPatch
                 case CustomGameMode.DoomTag:
                     DoomTag.OnCheckMurder(killer, target);
                     return false;
+                case CustomGameMode.Werewolf:
+                    Werewolf.OnCheckMurder(killer, target);
+                    return false;
             }
 
             PlagueBearer.CheckAndSpreadInfection(killer, target);
@@ -2151,6 +2154,9 @@ internal static class FixedUpdatePatch
                     break;
                 case CustomGameMode.Snowdown:
                     AdditionalSuffixes.Add(Snowdown.GetSuffix(seer, target));
+                    break;
+                case CustomGameMode.Werewolf:
+                    AdditionalSuffixes.Add(Werewolf.GetSuffix(seer, target));
                     break;
             }
 
